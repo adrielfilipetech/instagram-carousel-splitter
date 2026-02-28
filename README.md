@@ -1,6 +1,6 @@
 # 🖼️ Instagram Carousel Image Slicer
 
-Auto slicer for Instagram carousel images with Python and Flask. Split large images into 1080px wide vertical strips perfect for Instagram carousel posts.
+Auto slicer for Instagram carousel images. Split large images into 1080px wide vertical strips perfect for Instagram carousel posts.
 
 ## ✨ Features
 
@@ -9,91 +9,46 @@ Auto slicer for Instagram carousel images with Python and Flask. Split large ima
 - 🎯 Maintains original image height
 - 📦 Downloads as ZIP with sequential naming
 - 🖥️ Clean and modern web interface
-- 🚀 Fast processing with PIL/Pillow
+- 🗂️ Batch mode — process multiple images at once
+- 📴 Works fully offline — no server required
 
 ## 🛠️ Technologies
 
-- **Backend:** Python 3.10 + Flask
-- **Image Processing:** Pillow (PIL)
 - **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Image Processing:** Canvas API (native browser)
+- **ZIP Generation:** [JSZip v3.10.1](https://stuk.github.io/jszip/) by Stuart Knightley
 
-## 📋 Prerequisites
+## 📁 Project Structure
 
-- Python 3.10 or higher
-- pip (Python package manager)
-
-## 🚀 Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/adrielfilipedesign/instagram-carousel-splitter.git
-cd instagram-carousel-splitter
 ```
-
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-# or
-venv\Scripts\activate  # On Windows
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-## Docker setup
-
-Build the image:
-```bash
-docker build -t instagram-splitter .
-```
-
-Run container:
-```bash
-docker run -d --name instagram-splitter --restart=always -p 3100:3100 instagram-splitter
+instagram-carousel-splitter/
+├── index.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       ├── libs/
+│       │   └── jszip.min.js
+│       └── main.js
+└── README.md
 ```
 
 ## 💻 Usage
 
-1. Start the Flask server:
-```bash
-python app.py
-```
+No installation needed. Just open `index.html` in your browser.
 
-2. Open your browser and go to:
-```
-http://localhost:3100
-```
-
-3. Upload your image (drag & drop or click to select)
-
-4. Click "Split and Download"
-
-5. Your sliced images will be downloaded as a ZIP file
-
-## 📁 Project Structure
-```
-instagram-carousel-splitter/
-├── app.py                 # Flask backend
-├── templates/
-│   └── index.html        # Main page
-├── static/
-│   ├── css/
-│   │   └── style.css     # Styles
-│   └── js/
-│       └── main.js       # Frontend logic
-└── README.md
-```
+1. Open `index.html`
+2. Upload your image (drag & drop or click to select)
+3. Click "Process and Download"
+4. Your sliced images will be downloaded as a ZIP file
 
 ## 🎨 How It Works
 
 1. Upload an image of any width
 2. The app calculates how many 1080px wide parts are needed
-3. Splits the image horizontally maintaining the original height
-4. Names each part sequentially (filename_01, filename_02, etc.)
-5. Packages everything in a ZIP file for download
+3. Splits the image horizontally using the Canvas API
+4. Names each part sequentially (`filename_01`, `filename_02`, etc.)
+5. Packages everything in a ZIP file for download — all processed locally in the browser
 
 ## 📝 Supported Formats
 
@@ -103,10 +58,15 @@ instagram-carousel-splitter/
 - BMP
 - WEBP
 
+## 📦 Third-party Libraries
+
+| Library | Version | Author | License | Link |
+|---------|---------|--------|---------|------|
+| JSZip | 3.10.1 | Stuart Knightley | MIT | [stuk.github.io/jszip](https://stuk.github.io/jszip/) |
+
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
-
 
 ## ⭐ Show your support
 
