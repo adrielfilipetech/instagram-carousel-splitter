@@ -15,6 +15,7 @@
         }
 
         .container {
+            position: relative;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -286,3 +287,96 @@
                 padding: 30px 20px;
             }
         }
+
+        /* Ko-fi Button */
+.kofi-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Top Buttons */
+.top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #24292e;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.github-btn:hover {
+    background: #1a1f24;
+    transform: translateY(-2px);
+}
+
+.kofi-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FF5E5B;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 2px 8px rgba(255, 94, 91, 0.4);
+}
+
+.kofi-btn:hover {
+    background: #e04e4b;
+    transform: translateY(-2px);
+}
+
+.kofi-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.install-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.install-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .top-buttons {
+        position: static;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+}
