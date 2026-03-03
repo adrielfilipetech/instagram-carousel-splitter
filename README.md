@@ -14,7 +14,7 @@ Auto slicer for Instagram carousel images. Split large images into 1080px wide v
 
 ## 🛠️ Technologies
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Frontend:** [AiraKit Alpha](https://adrielfilipetech.github.io/AiraKit/) a design kit made with HTML5, CSS3, JavaScript (Vanilla)
 - **Image Processing:** Canvas API (native browser)
 - **ZIP Generation:** [JSZip v3.10.1](https://stuk.github.io/jszip/) by Stuart Knightley
 

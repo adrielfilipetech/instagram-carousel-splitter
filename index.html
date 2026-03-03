@@ -5,68 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>ICS - Instagram Carousel Splitter</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ICS">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <title>ICS - Instagram Carousel Splitter</title>
 </head>
 
-<script>
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBtn.style.display = 'inline-flex';
-    });
-
-    installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            installBtn.style.display = 'none';
-        }
-        deferredPrompt = null;
-    });
-
-    window.addEventListener('appinstalled', () => {
-        installBtn.style.display = 'none';
-    });
-</script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/instagram-carousel-splitter/service-worker.js')
-        .then(reg => console.log('SW registrado:', reg.scope))
-        .catch(err => console.error('SW erro:', err));
-    });
-  }
-</script>
 
 <body>
     <div class="container">
-        <h1>Instagram Carousel Splitter</h1>
-        <p class="subtitle">Auto split your instagram carrousel</p>
+        <div class="top-buttons">
+            <div class="lang-switcher"></div>
+
+            <button class="btn-theme" onclick="toggleTheme(this)">
+                <span class="theme-icon">🌙</span>
+                <span class="theme-label">Dark</span>
+            </button>
+
+
+        </div>
+
+        <div class="top-buttons">
+
+
+            <a href="https://github.com/adrielfilipetech/instagram-carousel-splitter" target="_blank"
+                class="github-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                GitHub
+            </a>
+
+            <a href="https://ko-fi.com/adrielfilipe" target="_blank" class="kofi-btn">
+                <img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi" class="kofi-icon">
+                Support me
+            </a>
+
+            <button class="install-btn" id="installBtn" style="display:none;">
+                ⬇️ Install App
+            </button>
+        </div>
+
+        <h1 data-i18n="title">Instagram Carousel Splitter</h1>
+        <p class="subtitle" data-i18n="subtitle">Auto split your instagram carousel</p>
 
         <div class="tabs">
-            <button class="tab active" data-tab="single">Single Image</button>
-            <button class="tab" data-tab="batch">Batch Mode</button>
+            <button class="tab active" data-tab="single" data-i18n="tabSingle">Single Image</button>
+            <button class="tab" data-tab="batch" data-i18n="tabBatch">Batch Mode</button>
         </div>
 
         <!-- Single Image -->
         <div id="single" class="tab-content active">
             <div class="drop-zone" id="dropZone">
                 <div class="drop-zone-icon">📁</div>
-                <div class="drop-zone-text">Drop your image here</div>
-                <div class="drop-zone-hint">or</div>
-                <button class="select-btn" onclick="document.getElementById('fileInput').click()">
+                <div class="drop-zone-text" data-i18n="dropText">Drop your image here</div>
+                <div class="drop-zone-hint" data-i18n="dropHint">or</div>
+                <button class="select-btn" onclick="document.getElementById('fileInput').click()" data-i18n="selectBtn">
                     Select image
                 </button>
             </div>
@@ -76,11 +78,11 @@
             <div class="preview" id="preview">
                 <img id="previewImage" class="preview-image" alt="Preview">
                 <div class="file-info">
-                    <p><strong>Filename:</strong> <span id="fileName"></span></p>
-                    <p><strong>Size:</strong> <span id="dimensions"></span></p>
-                    <p><strong>Number of pages:</strong> <span id="parts"></span></p>
+                    <p><strong data-i18n="fileName">Filename:</strong> <span id="fileName"></span></p>
+                    <p><strong data-i18n="fileSize">Size:</strong> <span id="dimensions"></span></p>
+                    <p><strong data-i18n="filePages">Number of pages:</strong> <span id="parts"></span></p>
                 </div>
-                <button class="process-btn" id="processBtn">Process and Download</button>
+                <button class="process-btn" id="processBtn" data-i18n="processBtn">Process and Download</button>
             </div>
         </div>
 
@@ -88,9 +90,10 @@
         <div id="batch" class="tab-content">
             <div class="drop-zone" id="dropZoneBatch">
                 <div class="drop-zone-icon">📁</div>
-                <div class="drop-zone-text">Drop multiple images here</div>
-                <div class="drop-zone-hint">or</div>
-                <button class="select-btn" onclick="document.getElementById('fileInputBatch').click()">
+                <div class="drop-zone-text" data-i18n="dropTextBatch">Drop multiple images here</div>
+                <div class="drop-zone-hint" data-i18n="dropHint">or</div>
+                <button class="select-btn" onclick="document.getElementById('fileInputBatch').click()"
+                    data-i18n="selectBtnBatch">
                     Select images
                 </button>
             </div>
@@ -100,41 +103,28 @@
             <div class="file-list" id="fileList"></div>
 
             <button class="process-btn batch-process-btn" id="processBatchBtn" style="display: none;">
-                Process All (<span id="fileCount">0</span> images)
+                <span data-i18n="processBatchBtn">Process All</span> (<span id="fileCount">0</span> <span
+                    data-i18n="tabBatch">images</span>)
             </button>
         </div>
 
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Processing your image<span id="loadingPlural"></span>...</p>
+            <p><span data-i18n="loading">Processing your image</span><span id="loadingPlural"></span>...</p>
         </div>
 
         <div class="error" id="error"></div>
         <div class="success" id="success"></div>
     </div>
-   <!-- Action Buttons -->
-    <div class="top-buttons">
-        <a href="https://github.com/adrielfilipetech/instagram-carousel-splitter" target="_blank" class="github-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            GitHub
-        </a>
-        <a href="https://ko-fi.com/adrielfilipe" target="_blank" class="kofi-btn">
-            <img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi" class="kofi-icon">
-            Support me
-        </a>
-        <button class="install-btn" id="installBtn" style="display:none;">
-            ⬇️ Install App
-        </button>
-    </div>
 
     <canvas id="canvas" style="display:none"></canvas>
 
+    <script src="assets/js/dark-mode.js"></script>
     <script src="assets/js/libs/jszip.min.js"></script>
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/main.js"></script>
 
-      
+
 </body>
 
 </html>
